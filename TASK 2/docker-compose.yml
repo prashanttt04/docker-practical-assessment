@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: nginx:stable-trixie
+    ports:
+      - 8080:80
+    depends_on:
+      - backend
+
+  backend:
+    image: my-backend-api:latest
+    depends_on:
+      - database
+
+  database:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: mydatabase
+    volumes:
+      - mydatabase:/var/lib/postgresql/data
+
+  volumes:
+    mydatabase:
