@@ -9,6 +9,7 @@ services:
       - backend
 
   backend:
+    build: .
     image: my-backend-api:latest
     depends_on:
       - database
@@ -23,5 +24,5 @@ services:
     volumes:
       - mydatabase:/var/lib/postgresql/data
 
-  volumes:
+volumes:
     mydatabase:
